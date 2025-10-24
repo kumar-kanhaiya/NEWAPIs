@@ -1,9 +1,8 @@
 package com.engagementtracker.demo.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -23,10 +22,18 @@ public class AttentionRecord {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private UUID studentId;
 
-    private UUID sessionId;
+    @ManyToOne
+    @JoinColumn(name = "id", nullable = false)
+    private Student student;
 
+    @ManyToOne
+    @JoinColumn(name = "id", nullable = false)
+    private Classroom session;
+
+    @Column(nullable = false)
+    @Min(0)
+    @Max(100)
     private int score;
 
     private LocalDateTime timeStamp;

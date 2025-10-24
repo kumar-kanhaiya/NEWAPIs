@@ -1,15 +1,14 @@
 package com.engagementtracker.demo.entity;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -21,9 +20,22 @@ public class Student {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID Id;
+    private UUID id;
 
     private String name;
 
-    private long rollNo;
+    @ManyToMany
+    @JoinTable(
+            name = "student_class",
+            joinColumns = @JoinColumn(
+                    name = "student_id",
+                    referencedColumnName = "id"
+
+            ),
+            inverseJoinColumns = @JoinColumn(name = "class_id",
+                    referencedColumnName = "id"
+            )
+
+    )
+    private Set<Classroom> classes;
 }
