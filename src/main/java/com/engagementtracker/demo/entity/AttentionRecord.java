@@ -24,11 +24,11 @@ public class AttentionRecord {
 
 
     @ManyToOne
-    @JoinColumn(name = "id", nullable = false)
+    @JoinColumn(name = "student_id", nullable = false)
     private Student student;
 
     @ManyToOne
-    @JoinColumn(name = "id", nullable = false)
+    @JoinColumn(name = "session_id", nullable = false)
     private Classroom session;
 
     @Column(nullable = false)

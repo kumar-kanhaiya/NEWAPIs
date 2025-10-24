@@ -19,8 +19,7 @@ import java.util.UUID;
 public class Classroom {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
+    private UUID id = UUID.randomUUID();
 
     private String subject;
 
