@@ -19,15 +19,15 @@ import java.util.UUID;
 public class AttentionRecord {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "attention_seq")
+    @SequenceGenerator(name = "attention_seq", sequenceName = "attention_seq", allocationSize = 1)
     private Long id;
 
-
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY) // performance optimization
     @JoinColumn(name = "student_id", nullable = false)
     private Student student;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "session_id", nullable = false)
     private Classroom session;
 
@@ -38,3 +38,4 @@ public class AttentionRecord {
 
     private LocalDateTime timeStamp;
 }
+

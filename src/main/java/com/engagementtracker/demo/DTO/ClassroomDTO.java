@@ -4,10 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import java.time.LocalDateTime;
 import java.util.Set;
-import java.util.UUID;
 
 @Data
 @AllArgsConstructor
@@ -15,9 +13,7 @@ import java.util.UUID;
 @Builder
 public class ClassroomDTO {
 
-    private UUID id;
+    private Long id;
     private String subject;
-    private LocalDateTime startTime;
-    private LocalDateTime endTime;
-    private Set<UUID> studentIds;
+    private Set<Long> studentIds;
 }

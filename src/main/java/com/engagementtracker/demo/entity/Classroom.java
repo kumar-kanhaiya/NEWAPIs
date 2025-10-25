@@ -19,14 +19,12 @@ import java.util.UUID;
 public class Classroom {
 
     @Id
-    private UUID id = UUID.randomUUID();
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "classroom_seq")
+    @SequenceGenerator(name = "classroom_seq", sequenceName = "classroom_seq", allocationSize = 1)
+    private Long id;
 
     private String subject;
 
-    private LocalDateTime startTime;
-
-    private LocalDateTime endTime;
-
-    @ManyToMany(mappedBy = "classes")
-    private Set<Student> student;
+    @ManyToMany(mappedBy = "classes", fetch = FetchType.LAZY)
+    private Set<Student> students;
 }

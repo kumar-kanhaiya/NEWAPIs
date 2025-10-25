@@ -19,22 +19,17 @@ import java.util.UUID;
 public class Student {
 
     @Id
-    private UUID id = UUID.randomUUID();
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "student_seq")
+    @SequenceGenerator(name = "student_seq", sequenceName = "student_seq", allocationSize = 1)
+    private Long id;
 
     private String name;
 
     @ManyToMany
     @JoinTable(
             name = "student_class",
-            joinColumns = @JoinColumn(
-                    name = "student_id",
-                    referencedColumnName = "id"
-
-            ),
-            inverseJoinColumns = @JoinColumn(name = "class_id",
-                    referencedColumnName = "id"
-            )
-
+            joinColumns = @JoinColumn(name = "student_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "class_id", referencedColumnName = "id")
     )
     private Set<Classroom> classes;
 }

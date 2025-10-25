@@ -1,5 +1,6 @@
 package com.engagementtracker.demo.controller;
 
+import com.engagementtracker.demo.DTO.AttentionRecordDTO;
 import com.engagementtracker.demo.entity.AttentionRecord;
 //import com.engagementtracker.demo.service.Service;
 import com.engagementtracker.demo.service.AttentionRecordService;
@@ -17,19 +18,11 @@ public class AttentionController {
     @Autowired
     private AttentionRecordService attentionRecordService;
 
-    @PostMapping("/batch")
-    public String uploadBatch(@RequestBody List<AttentionRecord> records) {
+    @PostMapping("/")
+    public String uploadBatch(@RequestBody AttentionRecordDTO records) {
         return attentionRecordService.uploadBatch(records);
     }
 
-    @GetMapping("/session/{sessionId}")
-    public List<AttentionRecord> getBySession(@PathVariable UUID sessionId) {
-        return attentionRecordService.getBySession(sessionId);
-    }
-
-    @GetMapping("/student/{studentId}/session/{sessionId}")
-    public List<AttentionRecord> getByStudentAndSession(@PathVariable UUID studentId ,
-                                                        @PathVariable UUID sessionId){
-        return attentionRecordService.getByStudentAndSession(studentId , sessionId);
-    }
+    @GetMapping("/{id}")
+    public AttentionRecord
 }
