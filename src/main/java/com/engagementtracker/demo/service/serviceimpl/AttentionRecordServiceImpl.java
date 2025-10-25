@@ -10,8 +10,8 @@ import com.engagementtracker.demo.repository.StudentRepository;
 import com.engagementtracker.demo.service.AttentionRecordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
-import java.util.UUID;
 
 @Service
 public class AttentionRecordServiceImpl implements AttentionRecordService {
@@ -26,7 +26,7 @@ public class AttentionRecordServiceImpl implements AttentionRecordService {
     private ClassroomRepository classroomRepository;
 
     @Override
-    public String uploadBatch(AttentionRecordDTO dto) {
+    public AttentionRecordDTO uploadBatch(AttentionRecordDTO dto) {
         Student student = studentRepository.findById(dto.getStudentId())
                 .orElseThrow(()-> new RuntimeException("Student not found"));
 
@@ -40,20 +40,47 @@ public class AttentionRecordServiceImpl implements AttentionRecordService {
                 .timeStamp(dto.getTimeStamp())
                 .build();
 
-        attentionRecordRepository.save(record);
-
-        return "Succefully insert ";
+        return toDTO(attentionRecordRepository.save(record));
 
     }
 
     @Override
-    public List<AttentionRecord> getBySession(UUID sessionId) {
-        return attentionRecordRepository.findBySessionId(sessionId);
+    public AttentionRecordDTO getById(Long id) {
+        return attentionRecordRepository.findById(id).map(this::toDTO)
+                .orElseThrow(() -> new RuntimeException("Record not found"));
     }
 
     @Override
-    public List<AttentionRecord> getByStudentAndSession(UUID studentId, UUID sessionId) {
-        return attentionRecordRepository.findByStudentIdAndSessionId(studentId,sessionId);
+    public List<AttentionRecordDTO> getAll() {
+        return attentionRecordRepository.findAll()
+                .stream().map(this::toDTO).toList();
     }
+
+    @Override
+    public void deleteById(Long id) {
+        if(attentionRecordRepository.findById(id) != null){
+            attentionRecordRepository.deleteById(id);
+            System.out.println("Successfully deleted");
+        }
+        else{
+            System.out.println("please enter valid id");
+        }
+
+    }
+
+
+    private AttentionRecordDTO toDTO(AttentionRecord r) {
+        return AttentionRecordDTO.builder()
+                .id(r.getId())
+                .studentId(r.getStudent().getId())
+                .sessionId(r.getSession().getId())
+                .score(r.getScore())
+                .timeStamp(r.getTimeStamp())
+                .build();
+    }
+
+
+
+
 
 }

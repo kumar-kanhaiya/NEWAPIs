@@ -1,17 +1,18 @@
 package com.engagementtracker.demo.service;
 
 import com.engagementtracker.demo.DTO.AttentionRecordDTO;
-import com.engagementtracker.demo.entity.AttentionRecord;
 
 import java.util.List;
-import java.util.UUID;
 
 
 public interface AttentionRecordService {
 
-    public String uploadBatch(AttentionRecordDTO records);
+    public AttentionRecordDTO uploadBatch(AttentionRecordDTO records);
 
-    public List<AttentionRecord> getBySession(UUID sessionId);
 
-    public List<AttentionRecord> getByStudentAndSession(UUID studentId, UUID sessionId);
+    public AttentionRecordDTO getById(Long id);
+
+    public List<AttentionRecordDTO> getAll();
+
+   public void deleteById(Long id);
 }

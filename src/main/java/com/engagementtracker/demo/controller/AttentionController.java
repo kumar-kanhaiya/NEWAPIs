@@ -19,10 +19,23 @@ public class AttentionController {
     private AttentionRecordService attentionRecordService;
 
     @PostMapping("/")
-    public String uploadBatch(@RequestBody AttentionRecordDTO records) {
+    public AttentionRecordDTO uploadBatch(@RequestBody AttentionRecordDTO records) {
         return attentionRecordService.uploadBatch(records);
     }
 
     @GetMapping("/{id}")
-    public AttentionRecord
+    public AttentionRecordDTO getById(@PathVariable Long id){
+        return attentionRecordService.getById(id);
+    }
+
+    @GetMapping
+    public List<AttentionRecordDTO> getAll(){
+        return attentionRecordService.getAll();
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteById(@PathVariable Long id){
+        attentionRecordService.deleteById(id);
+
+    }
 }
