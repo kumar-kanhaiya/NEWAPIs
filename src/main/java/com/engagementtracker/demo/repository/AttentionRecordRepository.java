@@ -10,7 +10,5 @@ import java.util.UUID;
 @Repository
 public interface AttentionRecordRepository extends JpaRepository<AttentionRecord , Long> {
 
-    List<AttentionRecord> findBySessionId(UUID sessionId);
 
-    List<AttentionRecord> findByStudentIdAndSessionId(UUID studentId , UUID sessionId);
 }
