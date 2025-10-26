@@ -14,27 +14,27 @@ public class ClassroomController {
     @Autowired
     private ClassroomService service;
 
-    @PostMapping
+    @PostMapping("/session")
     public ClassroomDTO create(@RequestBody ClassroomDTO dto){
         return service.create(dto);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("session/{id}")
     public ClassroomDTO getById(@PathVariable Long id){
         return service.getById(id);
     }
 
-    @GetMapping
+    @GetMapping("sessions")
     public List<ClassroomDTO> getAll(){
         return service.getAll();
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("session/{id}")
     public void delete(@PathVariable Long id){
         service.delete(id);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("session/{id}")
     public ClassroomDTO update(@PathVariable Long id , @RequestBody ClassroomDTO body){
         return service.updateClassroom(id,body);
     }

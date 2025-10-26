@@ -74,6 +74,13 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public void deleteById(Long id) {
+        if(studentRepository.findById(id) != null){
+            studentRepository.deleteById(id);
+            System.out.println("Successfully deleted");
+        }
+        else{
+            System.out.println("Please enter a valid id ");
+        }
 
     }
 

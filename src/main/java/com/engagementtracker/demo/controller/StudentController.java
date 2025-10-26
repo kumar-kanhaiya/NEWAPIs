@@ -14,29 +14,31 @@ public class StudentController {
     @Autowired
     private StudentService service;
 
-    @PostMapping
+    @PostMapping("/student")
     public StudentDTO create(@RequestBody StudentDTO studentDTO){
        return service.create(studentDTO);
     }
 
-    @GetMapping("/Student/{id}")
+    @GetMapping("/student/{id}")
     public StudentDTO getStudentById(@PathVariable Long id){
         return service.getStudentById(id);
     }
 
-    @GetMapping("/Students")
+    @GetMapping("/students")
     public List<StudentDTO> getAllStudents(){
         return service.getAllStudents();
     }
 
-    @PutMapping("Student/{id}")
+    @PutMapping("student/{id}")
     public StudentDTO update(@PathVariable Long id , @RequestBody StudentDTO studentDTO){
         return service.update(id,studentDTO);
     }
 
-    @DeleteMapping("Student/{id}")
+    @DeleteMapping("student/{id}")
     public void deleteById(@PathVariable Long id){
         service.deleteById(id);
     }
+
+
 
 }
