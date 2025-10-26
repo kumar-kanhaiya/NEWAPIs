@@ -9,6 +9,7 @@ import com.engagementtracker.demo.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -48,7 +49,33 @@ public class StudentServiceImpl implements StudentService {
         return toDTO(studentRepository.save(student));
     }
 
+    @Override
+    public StudentDTO getStudentById(Long id) {
+        Student student = studentRepository.findById(id)
+                .orElseThrow(()-> new RuntimeException("Enter a valid id"));
 
+        return toDTO(student);
+    }
+
+    @Override
+    public List<StudentDTO> getAllStudents() {
+        return studentRepository.findAll().stream().map(this::toDTO).toList();
+    }
+
+    @Override
+    public StudentDTO update(Long id, StudentDTO studentDTO) {
+        Student existing = studentRepository.findById(id)
+                .orElseThrow(()-> new RuntimeException("please enter valid id"));
+
+        existing.setName(studentDTO.getName());
+
+        return toDTO(existing);
+    }
+
+    @Override
+    public void deleteById(Long id) {
+
+    }
 
 
 }
