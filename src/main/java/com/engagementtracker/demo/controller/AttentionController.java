@@ -28,7 +28,8 @@ public class AttentionController {
         return attentionRecordService.getById(id);
     }
 
-    @GetMapping
+
+    @GetMapping("/")
     public List<AttentionRecordDTO> getAll(){
         return attentionRecordService.getAll();
     }
