@@ -25,6 +25,7 @@ public class Student {
 
     private String name;
 
+
     @ManyToMany
     @JoinTable(
             name = "student_class",
@@ -32,4 +33,6 @@ public class Student {
             inverseJoinColumns = @JoinColumn(name = "class_id", referencedColumnName = "id")
     )
     private Set<Classroom> classes;
+
+
 }

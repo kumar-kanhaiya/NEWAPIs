@@ -4,11 +4,8 @@ import com.engagementtracker.demo.entity.Student;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.UUID;
-
 @Repository
-public interface StudentRepository extends JpaRepository<Student , Long> {
-
-//    Student findStudentById(UUID uuid);
-
+public interface StudentRepository extends JpaRepository<Student, Long> {
+    // You can search by student name if needed:
+    // Optional<Student> findByName(String name);
 }

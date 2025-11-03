@@ -18,23 +18,23 @@ public class AttentionController {
     @Autowired
     private AttentionRecordService attentionRecordService;
 
-    @PostMapping("/")
+    @PostMapping("/batch")
     public AttentionRecordDTO uploadBatch(@RequestBody AttentionRecordDTO records) {
         return attentionRecordService.uploadBatch(records);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/batch/{id}")
     public AttentionRecordDTO getById(@PathVariable Long id){
         return attentionRecordService.getById(id);
     }
 
 
-    @GetMapping("/")
+    @GetMapping("/batchs")
     public List<AttentionRecordDTO> getAll(){
         return attentionRecordService.getAll();
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/batch/{id}")
     public void deleteById(@PathVariable Long id){
         attentionRecordService.deleteById(id);
 
