@@ -68,10 +68,18 @@ public class AttentionRecordServiceImpl implements AttentionRecordService {
 
     }
 
+    @Override
+    public List<Integer> getAllScores(Long studentId) {
+        return attentionRecordRepository.findByStudent_Id(studentId)
+                .stream()
+                .map(AttentionRecord::getScore)
+                .toList();
+    }
+
+
 
     private AttentionRecordDTO toDTO(AttentionRecord r) {
         return AttentionRecordDTO.builder()
-                .id(r.getId())
                 .studentId(r.getStudent().getId())
                 .sessionId(r.getSession().getId())
                 .score(r.getScore())

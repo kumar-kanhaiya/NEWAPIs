@@ -15,4 +15,6 @@ public interface AttentionRecordService {
     public List<AttentionRecordDTO> getAll();
 
    public void deleteById(Long id);
+
+    public List<Integer> getAllScores(Long id);
 }

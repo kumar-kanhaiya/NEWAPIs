@@ -13,6 +13,7 @@ import java.util.UUID;
 
 //@Controller
 @RestController
+//@RequestMapping("/api")
 public class AttentionController {
 
     @Autowired
@@ -38,5 +39,10 @@ public class AttentionController {
     public void deleteById(@PathVariable Long id){
         attentionRecordService.deleteById(id);
 
+    }
+
+    @GetMapping("/batch/score/{id}")
+    public List<Integer> getAllScores(@PathVariable Long id){
+        return attentionRecordService.getAllScores(id);
     }
 }
